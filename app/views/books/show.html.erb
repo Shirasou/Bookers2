@@ -61,7 +61,16 @@
                   </tbody>
                   </table>
 
-
+                    <% if @error_comment.present? %>
+                      <div id="error_explanation">
+                        <h2><%= pluralize(@error_comment.errors.count, "error") %> prohibited this obj from being saved:</h2>
+                        <ul>
+                          <% @error_comment.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
             <%= form_with(model:[@book, @book_comment], local: true) do |f| %>
               <div class="form-group">
                 <%= f.text_area :comment, class: "form-control" %>
